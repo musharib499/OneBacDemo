@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="MainThem" parent="Theme.MaterialComponents.NoActionBar.Bridge">
+        <item name="colorPrimary">@color/purple_200</item>
+        <item name="colorPrimaryDark">@color/purple_200</item>
+        <item name="android:windowBackground">@color/purple_500</item>
+    </style>
+
+    <style name="MainThem.Splash">
+        <item name="background">@color/purple_200</item>
+        <item name="android:windowBackground">@color/purple_200</item>
+    </style>
+    <style name="MyRatingBar" parent="@android:style/Widget.DeviceDefault.RatingBar.Indicator">
+        <item name="android:minHeight">48dp</item>
+        <item name="android:maxHeight">48dp</item>
+    </style>
+
+
+    <style name="myCard" parent="Widget.MaterialComponents.CardView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_margin">4dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="cardCornerRadius">30dp</item>
+        <item name="contentPadding">10dp</item>
+    </style>
+
+    <style name="TransparentText" parent="@android:style/TextAppearance">
+        <item name="android:textColor">#00000000</item>
+    </style>
+
+    <style name="normalText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+
+    <style name="normalText.pink">
+        <item name="android:textColor">@color/pink</item>
+    </style>
+
+    <style name="normalText.Green">
+        <item name="android:textColor">@color/green</item>
+    </style>
+
+    <style name="normalText.Large">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="normalText.small">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="normalText.Large.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="normalText.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>

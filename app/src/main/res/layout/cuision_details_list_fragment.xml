@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.app.ui.viewModule.DetailsListViewModel" />
+        <variable
+            name="adapter"
+            type="com.app.ui.base.BaseAdapterBinding" />
+        <variable
+            name="adapterHeader"
+            type="com.app.ui.base.BaseAdapterBinding" />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/purple_500"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleTextAppearance="@style/TransparentText"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:scrimVisibleHeightTrigger="100dp">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/hImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:scaleType="fitXY"
+                    thumbnail="@{vm.list.image}"
+                    app:layout_collapseParallaxMultiplier=".7"
+                     />
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/Widget.AppCompat.Toolbar"
+                    app:title="@{vm.list.name}"
+                    app:titleTextColor="@color/black" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:behavior_overlapTop="50dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:adapter="@{adapterHeader}"
+            android:layout_marginBottom="-25dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/zeroDp"
+            android:adapter="@{adapter}"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:orientation="vertical"
+            app:entity="@{vm.itemlist.FoodItem}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rl"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

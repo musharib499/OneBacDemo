@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">OneBanc</string>
+    <string name="welcome_in_currency_app">Welcome!! \n OneBac </string>
+    <string name="message" translatable="false">%s \n Please tap to reload.</string>
+    <string name="author_mushareb_ali" translatable="false">Author : Mushareb Ali</string>
+    <string name="no_data" translatable="false">No Data Found</string>
+    <string name="price" translatable="false">\u20B9 %d</string>
+    <string name="price_" translatable="false">\u20B9 %.2f</string>
+    <string name="_int" translatable="false">%d</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dish_name">Dish Name</string>
+    <string name="gst_amount">GST Amount 2.5%</string>
+    <string name="total_amount">Payable Amount</string>
+    <string name="place_order">PLace Order</string>
+    <string name="total_order_number">Total Order Number</string>
+    <string name="amount">Amount</string>
+    <string name="order_place">Congratualtion!! Your order place.</string>
+
+</resources>

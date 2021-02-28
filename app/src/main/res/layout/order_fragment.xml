@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="vm"
+            type="com.app.ui.viewModule.OrderViewModel" />
+
+    </data>
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/purple_500"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:expandedTitleTextAppearance="@style/TransparentText"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:scrimVisibleHeightTrigger="100dp">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/hImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:scaleType="fitXY"
+                        thumbnail="@{vm.item.image}"
+                        app:layout_collapseParallaxMultiplier=".7"
+                        />
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/Widget.AppCompat.Toolbar"
+                    app:title="@{vm.item.dishName}"
+                    app:titleTextColor="@color/black" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:behavior_overlapTop="50dp"
+            android:fitsSystemWindows="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            >
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card"
+            style="@style/myCard"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+
+            >
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrier"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="start"
+                    app:constraint_referenced_ids="tvName,tvAmount,tvCount,tvCount" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvName"
+                    style="@style/normalText"
+                    app:layout_constraintStart_toStartOf="@id/start"
+                    app:layout_constraintTop_toTopOf="@id/top"
+                    android:text="@string/dish_name"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCount"
+                    style="@style/normalText"
+                    app:layout_constraintStart_toStartOf="@id/start"
+                    app:layout_constraintTop_toBottomOf="@id/tvName"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:text="@string/total_order_number"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvAmount"
+                    style="@style/normalText"
+                    app:layout_constraintStart_toStartOf="@id/start"
+                    app:layout_constraintTop_toBottomOf="@id/tvCount"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:text="@string/amount"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvGST"
+                    style="@style/normalText"
+                    app:layout_constraintStart_toStartOf="@id/start"
+                    app:layout_constraintTop_toBottomOf="@id/tvAmount"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:text="@string/gst_amount"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTotalAmount"
+                    style="@style/normalText.Bold"
+                    app:layout_constraintStart_toStartOf="@id/start"
+                    app:layout_constraintTop_toBottomOf="@id/tvGST"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:text="@string/total_amount"
+                    />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvValueName"
+                    style="@style/normalText.Bold"
+                    app:layout_constraintEnd_toEndOf="@id/end"
+                    app:layout_constraintTop_toTopOf="@id/tvName"
+                    app:layout_constraintBottom_toBottomOf="@id/tvName"
+                    tools:text="Dish name"
+                    android:text="@{vm.item.dishName}"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvValueCount"
+                    style="@style/normalText.Bold"
+                    app:layout_constraintTop_toTopOf="@id/tvCount"
+                    app:layout_constraintBottom_toBottomOf="@id/tvCount"
+                    app:layout_constraintEnd_toEndOf="@id/end"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:text="@{@string/_int(vm.item.count)}"
+                    tools:text="Total Count"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvValueAmount"
+                    style="@style/normalText.Bold"
+                    app:layout_constraintTop_toTopOf="@id/tvAmount"
+                    app:layout_constraintBottom_toBottomOf="@id/tvAmount"
+                    app:layout_constraintEnd_toEndOf="@id/end"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:text="@{@string/price(vm.item.price*vm.item.count)}"
+                    tools:text="Total Count"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvValueGST"
+                    style="@style/normalText.Bold"
+                    app:layout_constraintTop_toTopOf="@id/tvGST"
+                    app:layout_constraintBottom_toBottomOf="@id/tvGST"
+                    app:layout_constraintEnd_toEndOf="@id/end"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    tools:text="GST Amount"
+                    android:text="@{@string/price_(vm.totalGST)}"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvValueTotalAmount"
+                    style="@style/normalText.Large.Bold"
+                    app:layout_constraintEnd_toEndOf="@id/end"
+                    app:layout_constraintTop_toTopOf="@id/tvTotalAmount"
+                    app:layout_constraintBottom_toBottomOf="@id/tvTotalAmount"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:text="@{@string/price_(vm.totalAmountGST)}"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnOrder"
+                    android:layout_width="@dimen/zeroDp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/end"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    app:layout_constraintTop_toBottomOf="@id/tvValueTotalAmount"
+                    android:text="@string/place_order"
+                    />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_percent="0.15"
+                    />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/start"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent=".05"
+                    />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent=".95"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

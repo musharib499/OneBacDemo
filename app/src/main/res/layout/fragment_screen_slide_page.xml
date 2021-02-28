@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="vm"
+            type="com.app.ui.viewModule.SlideViewModel" />
+        <variable
+            name="fragment"
+            type="com.app.ui.fragment.ScreenSlidePageFragment" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/myCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:contentPadding="@dimen/zeroDp"
+            android:layout_margin="20dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/margin_normal"
+                android:minHeight="500dp"
+                android:onClick="@{()->fragment.moveNext(vm.item)}"
+                >
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_dis_name"
+                    style="@style/normalText.Large.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin_normal"
+                    android:gravity="center"
+                    android:text="@{vm.item.dishName}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_dis_categories"
+                    style="@style/normalText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@{vm.item.name}"
+                    android:textColor="#E2E2E2"
+                    app:layout_constraintEnd_toEndOf="@id/tv_dis_name"
+                    app:layout_constraintStart_toStartOf="@id/tv_dis_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_dis_name" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/zeroDp"
+                    android:layout_marginTop="@dimen/margin_normal"
+                    android:scaleType="fitXY"
+                    thumbnail="@{vm.item.image}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_dis_categories" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
+</layout>

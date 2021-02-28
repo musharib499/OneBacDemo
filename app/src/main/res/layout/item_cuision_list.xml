@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.app.ui.viewModule.DetailsListViewModel" />
+        <variable
+            name="pos"
+            type="Integer" />
+        <variable
+            name="count"
+            type="Integer"/>
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        style="@style/myCard"
+        app:cardCornerRadius="5dp"
+        app:contentPadding="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+           <androidx.appcompat.widget.AppCompatImageView
+               android:id="@+id/image"
+               android:layout_width="150dp"
+               android:layout_height="100dp"
+               thumbnail="@{vm.itemlist.FoodItem.get(pos).image}"
+               android:scaleType="fitXY"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintBottom_toBottomOf="parent"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                style="@style/normalText.Bold"
+                android:layout_width="wrap_content"
+                android:text="@{vm.itemlist.FoodItem.get(pos).dishName}"
+                android:layout_marginStart="@dimen/margin_normal"
+                android:layout_height="wrap_content"
+                tools:text="title"
+                app:layout_constraintStart_toEndOf="@id/image"
+                app:layout_constraintTop_toTopOf="@id/image"
+
+                />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/price"
+                style="@style/normalText"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:layout_height="wrap_content"
+                android:text="@{@string/price(vm.itemlist.FoodItem.get(pos).price)}"
+                app:layout_constraintStart_toStartOf="@id/title"
+                app:layout_constraintTop_toBottomOf="@id/title"
+                app:layout_constraintBottom_toTopOf="@id/btnMin"
+                tools:text="Price"
+                />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/discount"
+                android:layout_width="wrap_content"
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:layout_height="wrap_content"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:max="5"
+                android:layout_weight="1"
+                android:rating="@{vm.itemlist.foodItem.get(pos).rating}"
+                android:numStars="5"
+                android:layout_marginStart="@dimen/margin_normal"
+                app:layout_constraintStart_toEndOf="@id/price"
+                app:layout_constraintTop_toTopOf="@id/price"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:progressTint="@color/green"
+                app:layout_constraintBottom_toBottomOf="@id/price"
+                />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnMin"
+                android:layout_width="30dp"
+                android:padding="0dp"
+                android:layout_marginEnd="@dimen/margin_normal"
+                app:layout_constraintStart_toStartOf="@id/price"
+                app:layout_constraintBottom_toBottomOf="@id/image"
+                android:layout_height="40dp"
+                android:text="-"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/normalText.Large"
+                android:padding="@dimen/margin_normal"
+                tools:text="12"
+                android:text="1"
+                app:layout_constraintTop_toTopOf="@id/btnMin"
+                app:layout_constraintBottom_toBottomOf="@id/btnMin"
+                app:layout_constraintStart_toEndOf="@id/btnMin"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAdd"
+                android:layout_width="30dp"
+                android:padding="0dp"
+                android:layout_marginEnd="@dimen/margin_normal"
+                app:layout_constraintBottom_toBottomOf="@id/tv_count"
+                app:layout_constraintTop_toTopOf="@id/tv_count"
+                app:layout_constraintStart_toEndOf="@id/tv_count"
+                android:layout_height="40dp"
+                android:text="+"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOrder"
+                android:layout_width="70dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:padding="0dp"
+                android:text="Buy"
+                app:layout_constraintBottom_toBottomOf="@id/btnAdd"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@id/btnAdd"
+                app:layout_constraintTop_toTopOf="@id/btnAdd" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

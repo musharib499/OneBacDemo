@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ओनबेक</string>
+    <string name="welcome_in_currency_app">स्वागत हे!!  ओनबेक</string>
+    <string name="dish_name">डिश का नाम</string>
+    <string name="gst_amount">जीएसटी राशि 2.5%</string>
+    <string name="total_amount">भुगतान योग्य राशि</string>
+    <string name="place_order">आदेश देना</string>
+    <string name="total_order_number">कुल आदेश संख्या</string>
+    <string name="amount">राशि</string>
+    <string name="hello_blank_fragment">हैलो खाली टुकड़ा</string>
+    <string name="order_place">बधाई हो !! आपका आदेश स्थान।</string>
+</resources>
