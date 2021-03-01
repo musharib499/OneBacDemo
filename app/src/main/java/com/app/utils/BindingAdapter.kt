@@ -3,9 +3,7 @@ package com.app.utils
 import android.text.TextUtils
 import android.view.View
 import android.widget.ImageView
-import android.widget.ProgressBar
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.app.R
@@ -14,6 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.bumptech.glide.request.RequestOptions
 import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by Musharib Ali on 11/2/21.
@@ -37,6 +36,11 @@ fun AppCompatTextView.setCalculateGStText(value: Float?) {
 @BindingAdapter("calculateAmount")
 fun AppCompatTextView.setCalculateAmountText(value: Float?) {
     this.text = "\u20B9" +value.toString()
+}
+@BindingAdapter("timeDate")
+fun AppCompatTextView.setTimeDateText(value: Long?) {
+
+    this.text = SimpleDateFormat("E, dd MMM hh:mm a").format(value?.let { Date(it) }).toString()
 }
 
 @BindingAdapter("entity")

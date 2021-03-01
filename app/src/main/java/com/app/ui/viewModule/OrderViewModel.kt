@@ -1,16 +1,18 @@
 package com.app.ui.viewModule
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.app.data.model.FoodMenu
+import androidx.lifecycle.viewModelScope
+import com.app.data.database.OrderHistroyListDao
+import com.app.data.model.BookedOrder
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class OrderViewModel : ViewModel() {
-    var _item : MutableLiveData<FoodMenu.Category.Details.FoodItem> = MutableLiveData()
-    val item : LiveData<FoodMenu.Category.Details.FoodItem> get() = _item
-    val _totalGST:MutableLiveData<Float> = MutableLiveData()
-    val totalGST:LiveData<Float> get() = _totalGST
-    val _totalAmountGST:MutableLiveData<Float> = MutableLiveData()
-    val totalAmountGST:LiveData<Float> get() = _totalAmountGST
+class OrderViewModel @ViewModelInject constructor (private val orderHistroyListDao: OrderHistroyListDao)  : ViewModel() {
+    var _item : MutableLiveData<BookedOrder> = MutableLiveData()
+    val item : LiveData<BookedOrder> get() = _item
+    fun addItem(order: BookedOrder){ viewModelScope.launch(Dispatchers.IO) { orderHistroyListDao.insert(order) }}
 
 }

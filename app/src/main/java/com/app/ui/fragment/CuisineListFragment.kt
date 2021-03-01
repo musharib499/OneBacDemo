@@ -8,15 +8,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.viewpager.widget.ViewPager
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.app.R
 import com.app.databinding.CuisionListFragmentBinding
 import com.app.locale.LocaleChanger
 import com.app.locale.Locales
+import com.app.ui.AppNavigatorInterface
+import com.app.ui.Command
 import com.app.ui.SplashActivity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CuisineListFragment : Fragment() {
@@ -27,6 +30,8 @@ class CuisineListFragment : Fragment() {
     }
 
     private lateinit var binding: CuisionListFragmentBinding
+    @Inject
+    lateinit var navigatorInterface: AppNavigatorInterface
     private var count  = 1
 
     override fun onCreateView(
@@ -45,24 +50,24 @@ class CuisineListFragment : Fragment() {
     }
 
     private fun init() {
-        var adapter = ScreenSlidePagerAdapter(childFragmentManager)
-        binding.pager.adapter = adapter
+        var adapt = ScreenSlidePagerAdapter(this.requireActivity())
         Log.d("LANG",LocaleChanger.getLocaleFromPref(requireContext()).language)
         binding.lang = LocaleChanger.getLocaleFromPref(requireContext()).language
-        binding.pager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-            override fun onPageSelected(position: Int) {}
-            override fun onPageScrollStateChanged(state: Int) {
-                if (state === ViewPager.SCROLL_STATE_IDLE) {
-                    val index: Int = binding.pager.getCurrentItem()
-                    if (index == 0) binding.pager.setCurrentItem(
-                        adapter.getCount(),
-                        false
-                    ) else if (index == adapter.getCount()-1) binding.pager.setCurrentItem(0, false)
+        with(binding.pager){
+            adapter = adapt
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+                override fun onPageScrollStateChanged(state: Int) {
+                    super.onPageScrollStateChanged(state)
+                    if (state == ViewPager2.SCROLL_STATE_IDLE || state == ViewPager2.SCROLL_STATE_DRAGGING) {
+                        if (currentItem == 0)
+                            setCurrentItem(adapt.itemCount - 2, false)
+                        else if (currentItem == adapt.itemCount -1)
+                            setCurrentItem(1, false)
+                    }
                 }
-
-            }
-        })
+            })
+            setCurrentItem(1, false)
+        }
         binding.group.setOnCheckedChangeListener { group, checkedId ->
             if (checkedId == R.id.radioButton2)
                 LocaleChanger.setLocale(requireContext(), Locales.getLang("hi"))
@@ -74,19 +79,17 @@ class CuisineListFragment : Fragment() {
                 startActivity(Intent(activity, SplashActivity::class.java));
             }
         }
+        binding.tvHistory.setOnClickListener { navigatorInterface.navigator(Command.HISTORY) }
 
 
     }
 
 
 
-    private inner class ScreenSlidePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(
-        fm,
-        CuisineListFragment.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
-    ) {
-        override fun getCount(): Int = NUM_PAGES
+    private inner class  ScreenSlidePagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
+        override fun getItemCount(): Int = NUM_PAGES
 
-        override fun getItem(position: Int): Fragment = ScreenSlidePageFragment.newInstance(position)
+        override fun createFragment(position: Int): Fragment = ScreenSlidePageFragment.newInstance(position)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {

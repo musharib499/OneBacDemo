@@ -10,4 +10,9 @@
     <string name="amount">राशि</string>
     <string name="hello_blank_fragment">हैलो खाली टुकड़ा</string>
     <string name="order_place">बधाई हो !! आपका आदेश स्थान।</string>
+    <string name="add">जोड़ना</string>
+    <string name="remove">हटाना</string>
+    <string name="booking_time">बुकिंग की तारीख : %s</string>
+    <string name="order_history">आदेश इतिहास</string>
+    <string name="no_history">कोई इतिहास नहीं</string>
 </resources>

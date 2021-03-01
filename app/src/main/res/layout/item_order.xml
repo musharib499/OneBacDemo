@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="vm"
+            type="com.app.ui.viewModule.HistoryViewModel" />
+        <variable
+            name="pos"
+            type="Integer" />
+    </data>
+<com.google.android.material.card.MaterialCardView
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    app:cardBackgroundColor="@color/white"
+    app:shapeAppearance="@style/ShapeAppearance.MyApp.MediumComponent.Cut"
+
+    >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:barrierDirection="start"
+            app:constraint_referenced_ids="tvName,tvAmount,tvCount,tvCount" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvName"
+            style="@style/normalText"
+            android:text="@string/dish_name"
+            app:layout_constraintStart_toStartOf="@id/start"
+            app:layout_constraintTop_toTopOf="@id/top"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCount"
+            style="@style/normalText"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/total_order_number"
+            app:layout_constraintStart_toStartOf="@id/start"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAmount"
+            style="@style/normalText"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/amount"
+            app:layout_constraintStart_toStartOf="@id/start"
+            app:layout_constraintTop_toBottomOf="@id/tvCount"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvGST"
+            style="@style/normalText"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/gst_amount"
+            app:layout_constraintStart_toStartOf="@id/start"
+            app:layout_constraintTop_toBottomOf="@id/tvAmount"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTotalAmount"
+            style="@style/normalText.Bold"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/total_amount"
+            app:layout_constraintStart_toStartOf="@id/start"
+            app:layout_constraintTop_toBottomOf="@id/tvGST"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvValueName"
+            style="@style/normalText.Bold"
+            android:text="@{vm.item.get(pos).dishName}"
+            app:layout_constraintBottom_toBottomOf="@id/tvName"
+            app:layout_constraintEnd_toEndOf="@id/end"
+            app:layout_constraintTop_toTopOf="@id/tvName"
+            tools:text="Dish name"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvValueCount"
+            style="@style/normalText.Bold"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@{@string/_int(vm.item.get(pos).count)}"
+            app:layout_constraintBottom_toBottomOf="@id/tvCount"
+            app:layout_constraintEnd_toEndOf="@id/end"
+            app:layout_constraintTop_toTopOf="@id/tvCount"
+            tools:text="Total Count"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvValueAmount"
+            style="@style/normalText.Bold"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@{@string/price(vm.item.get(pos).amount)}"
+            app:layout_constraintBottom_toBottomOf="@id/tvAmount"
+            app:layout_constraintEnd_toEndOf="@id/end"
+            app:layout_constraintTop_toTopOf="@id/tvAmount"
+            tools:text="Total Count"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvValueGST"
+            style="@style/normalText.Bold"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@{@string/price_(vm.item.get(pos).gstAmount)}"
+            app:layout_constraintBottom_toBottomOf="@id/tvGST"
+            app:layout_constraintEnd_toEndOf="@id/end"
+            app:layout_constraintTop_toTopOf="@id/tvGST"
+            tools:text="GST Amount"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvValueTotalAmount"
+            style="@style/normalText.Large.Bold"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@{@string/price_(vm.item.get(pos).payAmount)}"
+            app:layout_constraintBottom_toBottomOf="@id/tvTotalAmount"
+            app:layout_constraintEnd_toEndOf="@id/end"
+            app:layout_constraintTop_toTopOf="@id/tvTotalAmount"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnOrder"
+            style="@style/normalText.Bold"
+            android:layout_marginTop="@dimen/margin_normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/end"
+            app:layout_constraintTop_toBottomOf="@id/tvValueTotalAmount"
+             app:timeDate="@{vm.item.get(pos).time}"
+            tools:text="Date and Time"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.15"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".05"
+            />
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".95"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
+</layout>

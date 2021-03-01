@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.app.R
 import com.app.ui.fragment.CuisineListFragment
 import com.app.ui.fragment.DetailsListFragment
+import com.app.ui.fragment.HistoryFragment
 import com.app.ui.fragment.OrderFragment
 import javax.inject.Inject
 
@@ -21,6 +22,7 @@ class AppNavigator @Inject constructor(val activity: FragmentActivity) : AppNavi
             Command.HOME -> CuisineListFragment.newInstance()
             Command.DETAILS -> DetailsListFragment.newInstance()
             Command.ORDER -> OrderFragment.newInstance()
+            Command.HISTORY -> HistoryFragment.newInstance()
         }
         fragment.let {
             b?.let { v -> it.arguments = v }
@@ -48,5 +50,6 @@ interface AppNavigatorInterface {
 enum class Command {
     HOME,
     DETAILS,
-    ORDER
+    ORDER,
+    HISTORY,
 }

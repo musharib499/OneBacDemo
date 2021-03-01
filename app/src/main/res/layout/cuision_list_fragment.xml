@@ -16,7 +16,7 @@
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_margin="@dimen/margin_normal"
         android:layout_height="wrap_content">
@@ -40,13 +40,23 @@
             android:tag="1"
             android:textSize="18sp"/>
     </RadioGroup>
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/pager"
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvHistory"
+            style="@style/normalText.Large"
+            android:text="@string/order_history"
+            app:layout_constraintBottom_toBottomOf="@id/group"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toEndOf="@id/group"
+            app:layout_constraintTop_toTopOf="@id/group" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="@dimen/zeroDp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+             android:orientation="horizontal"
             app:layout_constraintTop_toBottomOf="@id/group"
             app:layout_constraintBottom_toBottomOf="parent"
             />

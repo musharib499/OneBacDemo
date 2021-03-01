@@ -6,6 +6,9 @@
         <variable
             name="vm"
             type="com.app.ui.viewModule.OrderViewModel" />
+        <variable
+            name="fragment"
+            type="com.app.ui.fragment.OrderFragment" />
 
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -58,11 +61,11 @@
             >
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card"
-            style="@style/myCard"
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-
+            android:layout_margin="4dp"
+            app:cardBackgroundColor="@color/white"
+            app:shapeAppearance="@style/ShapeAppearance.MyApp.MediumComponent.Cut"
             >
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -141,7 +144,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/tvAmount"
                     app:layout_constraintEnd_toEndOf="@id/end"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:text="@{@string/price(vm.item.price*vm.item.count)}"
+                    android:text="@{@string/price(vm.item.amount)}"
                     tools:text="Total Count"
                     />
                 <androidx.appcompat.widget.AppCompatTextView
@@ -152,7 +155,7 @@
                     app:layout_constraintEnd_toEndOf="@id/end"
                     android:layout_marginTop="@dimen/margin_normal"
                     tools:text="GST Amount"
-                    android:text="@{@string/price_(vm.totalGST)}"
+                    android:text="@{@string/price_(vm.item.gstAmount)}"
                     />
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvValueTotalAmount"
@@ -161,7 +164,7 @@
                     app:layout_constraintTop_toTopOf="@id/tvTotalAmount"
                     app:layout_constraintBottom_toBottomOf="@id/tvTotalAmount"
                     android:layout_marginTop="@dimen/margin_normal"
-                    android:text="@{@string/price_(vm.totalAmountGST)}"
+                    android:text="@{@string/price_(vm.item.payAmount)}"
                     />
 
                 <com.google.android.material.button.MaterialButton
@@ -172,6 +175,7 @@
                     android:layout_marginTop="@dimen/margin_normal"
                     app:layout_constraintTop_toBottomOf="@id/tvValueTotalAmount"
                     android:text="@string/place_order"
+                    android:onClick="@{()->fragment.orderBook()}"
                     />
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/top"
