@@ -55,13 +55,13 @@ class CuisineListFragment : Fragment() {
         binding.lang = LocaleChanger.getLocaleFromPref(requireContext()).language
         with(binding.pager){
             adapter = adapt
-            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
                 override fun onPageScrollStateChanged(state: Int) {
                     super.onPageScrollStateChanged(state)
                     if (state == ViewPager2.SCROLL_STATE_IDLE || state == ViewPager2.SCROLL_STATE_DRAGGING) {
                         if (currentItem == 0)
-                            setCurrentItem(adapt.itemCount - 2, false)
-                        else if (currentItem == adapt.itemCount -1)
+                            setCurrentItem(adapt.itemCount - 1, false)
+                        else if (currentItem == adapt.itemCount - 1)
                             setCurrentItem(1, false)
                     }
                 }
@@ -76,7 +76,7 @@ class CuisineListFragment : Fragment() {
             count++
             if (count>2) {
                 activity?.finish()
-                startActivity(Intent(activity, SplashActivity::class.java));
+                startActivity(Intent(activity, SplashActivity::class.java))
             }
         }
         binding.tvHistory.setOnClickListener { navigatorInterface.navigator(Command.HISTORY) }
